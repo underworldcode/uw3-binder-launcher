@@ -1,4 +1,4 @@
-# Binder launcher for Underworld3 - main branch
+# Binder launcher for Underworld3 - development branch
 # Uses pre-built base image from GHCR
 #
 # This repo exists separately so mybinder.org can cache the image.
@@ -6,5 +6,5 @@
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01
 
-# Pull from main branch of underworld3
-ENV UW3_BRANCH=main
+# Pull from development branch of underworld3
+ENV UW3_BRANCH=development
