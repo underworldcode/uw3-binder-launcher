@@ -1,8 +1,14 @@
 # Underworld3 Binder Launcher
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main)
-
 Launch Underworld3 tutorials in your browser via mybinder.org.
+
+## Launch Options
+
+| Branch | Underworld3 Branch | Launch |
+|--------|-------------------|--------|
+| `main` | `main` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main) |
+| `uw3-release-candidate` | `uw3-release-candidate` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/uw3-release-candidate) |
+| `development` | `development` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/development) |
 
 ## How it works
 
@@ -20,7 +26,7 @@ mybinder.org
 
 On container start:
     │
-    ├── git pull latest underworld3
+    ├── git pull underworld3 (branch set by UW3_BRANCH env var)
     ├── Rebuild (~30 seconds)
     └── Launch JupyterLab with tutorials
 ```
@@ -35,6 +41,12 @@ On container start:
 
 This repo only needs updating when:
 - The base image version changes (update `FROM` tag in `.binder/Dockerfile`)
-- The base image URL changes
+- A new underworld3 branch needs a launcher (create new branch here)
 
 Code changes to Underworld3 are pulled automatically on each launch.
+
+## Adding a new branch
+
+1. Create a new branch in this repo: `git checkout -b <branch-name>`
+2. Edit `.binder/Dockerfile` to set `ENV UW3_BRANCH=<underworld3-branch>`
+3. Push: `git push origin <branch-name>`
