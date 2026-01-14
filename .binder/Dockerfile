@@ -1,14 +1,29 @@
-# Binder launcher for Underworld3 - uw3-release-candidate branch
-# Uses pre-built base image from GHCR
+# Generic Binder Launcher for Underworld3
+# ========================================
 #
-# This repo exists separately so mybinder.org can cache the image.
-# Image includes JIT compiler toolchain (with libexec/cc1) and Mesa software rendering
-# Split layers for reliable binder uploads
-# Includes jupyter-server-proxy for trame PyVista backend
+# This launcher provides the Underworld3 environment for ANY repository.
 #
-# Requires container sha256:f3523b871c9d19a2d5a6d44baaa652a82a7a2f9c14f70eddebd3b2361ff11e25
+# Features:
+# - Pre-built UW3 environment (cached for fast launches)
+# - nbgitpuller for cloning any content repository
+# - JIT compiler toolchain for custom extensions
+# - Mesa software rendering for visualization
+# - Split layers for reliable mybinder.org uploads
+#
+# Usage:
+# 1. Direct launch (UW3 tutorials):
+#    https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
+#
+# 2. Launch with your repository (via nbgitpuller):
+#    https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
+#      ?urlpath=git-pull?repo=<your-repo-url>&branch=<branch>&urlpath=lab/tree/<repo-name>
+#
+# See: https://github.com/underworldcode/underworld3/blob/main/scripts/binder_wizard.py
+#      for generating launch URLs
+#
+# Image SHA: sha256:692228fca8e37e2d18209199ba74329ca6dfb7133be2dda0cab3879144707d73
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
-# Code is frozen at image build time (from uw3-release-candidate branch)
+# Default branch for UW3 content (used when launching tutorials directly)
 ENV UW3_BRANCH=uw3-release-candidate
