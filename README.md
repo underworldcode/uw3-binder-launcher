@@ -6,7 +6,7 @@ Launch Underworld3 in your browser via mybinder.org - either with the built-in t
 
 Click to launch JupyterLab with Underworld3 tutorials:
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main)
 
 ## Launch Your Own Content
 
@@ -19,7 +19,7 @@ python scripts/binder_wizard.py
 
 Or generate manually:
 ```
-https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
+https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main
   ?urlpath=git-pull
   ?repo=https://github.com/YOUR-USERNAME/YOUR-REPO
   &branch=main
@@ -29,7 +29,7 @@ https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
 ### Example Badge for Your README
 
 ```markdown
-[![Launch in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FYOUR-USERNAME%252FYOUR-REPO%26branch%3Dmain%26urlpath%3Dlab%252Ftree%252FYOUR-REPO)
+[![Launch in Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FYOUR-USERNAME%252FYOUR-REPO%26branch%3Dmain%26urlpath%3Dlab%252Ftree%252FYOUR-REPO)
 ```
 
 ## How It Works

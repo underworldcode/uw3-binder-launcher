@@ -12,10 +12,10 @@
 #
 # Usage:
 # 1. Direct launch (UW3 tutorials):
-#    https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
+#    https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main
 #
 # 2. Launch with your repository (via nbgitpuller):
-#    https://mybinder.org/v2/gh/underworldcode/uw3-launcher/main
+#    https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main
 #      ?urlpath=git-pull?repo=<your-repo-url>&branch=<branch>&urlpath=lab/tree/<repo-name>
 #
 # See: https://github.com/underworldcode/underworld3/blob/main/scripts/binder_wizard.py
