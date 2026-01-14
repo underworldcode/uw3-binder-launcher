@@ -3,11 +3,11 @@
 #
 # This repo exists separately so mybinder.org can cache the image.
 # Image uses split layers (<500MB each) for reliable binder uploads
-# Start script does fast git pull (shallow clone) then launches Jupyter
+# Minimal start script - just sets PATH and launches jupyter directly
 #
-# Requires container sha256:793fe8c557ce1675d11d044baca75fbf4e8935c4f459af71d7151be09516cefc
+# Requires container sha256:9570cd868e224fdae01d83a9e3960ef656db791e9ef7361ae6cf384875be55f5
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
-# Branch to pull at startup (shallow git pull)
+# Code is frozen at image build time (from uw3-release-candidate branch)
 ENV UW3_BRANCH=uw3-release-candidate
