@@ -6,7 +6,7 @@
 # Split layers for reliable binder uploads
 # Includes jupyter-server-proxy for trame PyVista backend
 #
-# Requires container sha256:6d3894260f28dc837a21ce77a94bb1781f4ca12422934be7a4bd34b4a7b1223f
+# Requires container sha256:f3523b871c9d19a2d5a6d44baaa652a82a7a2f9c14f70eddebd3b2361ff11e25
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
