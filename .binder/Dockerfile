@@ -2,10 +2,10 @@
 # Uses pre-built base image from GHCR
 #
 # This repo exists separately so mybinder.org can cache the image.
-# Image uses split layers (<500MB each) for reliable binder uploads
-# Minimal start script - just sets PATH and launches jupyter directly
+# Image includes JIT compiler toolchain and Mesa software rendering
+# Split layers for reliable binder uploads
 #
-# Requires container sha256:9570cd868e224fdae01d83a9e3960ef656db791e9ef7361ae6cf384875be55f5
+# Requires container sha256:361fe787af610d07544d798235991af51a25a36fafe0a538027223c7816da07c
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
