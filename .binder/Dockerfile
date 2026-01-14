@@ -2,11 +2,11 @@
 # Uses pre-built base image from GHCR
 #
 # This repo exists separately so mybinder.org can cache the image.
-# SLIM IMAGE: Code is frozen at image build time (no runtime git pull)
+# Start script does fast git pull (shallow clone) then launches Jupyter
 #
-# Requires container sha256:f158e383b8a624f4314dbaa376afa917edbd5f2ff2eb5172da0536e53ba3e771
+# Requires container sha256:dc1f6bcd18d19b87c227503c415fd180471576a89c5334d55ad72565665b6d3c
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
-# Kept for documentation - slim image does not pull at runtime
+# Branch to pull at startup (shallow git pull)
 ENV UW3_BRANCH=uw3-release-candidate
