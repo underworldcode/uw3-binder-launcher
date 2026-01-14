@@ -4,8 +4,9 @@
 # This repo exists separately so mybinder.org can cache the image.
 # Image includes JIT compiler toolchain (with libexec/cc1) and Mesa software rendering
 # Split layers for reliable binder uploads
+# Includes jupyter-server-proxy for trame PyVista backend
 #
-# Requires container sha256:9bd06ad9176e64496df498829f6fbfcb9dc50eac91e0f53a317f9a4edef70308
+# Requires container sha256:6d3894260f28dc837a21ce77a94bb1781f4ca12422934be7a4bd34b4a7b1223f
 
 FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
 
