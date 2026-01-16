@@ -23,7 +23,7 @@
 #
 # Image SHA: sha256:692228fca8e37e2d18209199ba74329ca6dfb7133be2dda0cab3879144707d73
 
-FROM ghcr.io/underworldcode/uw3-base:2025.01-slim
+FROM ghcr.io/underworldcode/uw3-base:uw3-release-candidate-slim
 
 # Default branch for UW3 content (used when launching tutorials directly)
 ENV UW3_BRANCH=uw3-release-candidate
