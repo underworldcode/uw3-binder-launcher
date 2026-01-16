@@ -1,0 +1,43 @@
+name: Update Image Reference
+
+# Triggered by underworld3 repo when a new Docker image is built
+# Updates the .binder/Dockerfile with the new image reference
+
+on:
+  repository_dispatch:
+    types: [image-updated]
+
+jobs:
+  update-dockerfile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the correct branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+
+      - name: Show payload
+        run: |
+          echo "Branch: ${{ github.event.client_payload.branch }}"
+          echo "Current Dockerfile:"
+          cat .binder/Dockerfile
+
+      - name: Update Dockerfile FROM tag
+        run: |
+          BRANCH="${{ github.event.client_payload.branch }}"
+          # Update the FROM line to use the new branch-specific tag
+          sed -i "s|FROM ghcr.io/underworldcode/uw3-base:.*|FROM ghcr.io/underworldcode/uw3-base:${BRANCH}-slim|" .binder/Dockerfile
+          echo "Updated Dockerfile:"
+          cat .binder/Dockerfile
+
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .binder/Dockerfile
+          # Only commit if there are changes
+          git diff --staged --quiet || git commit -m "Update image tag for ${{ github.event.client_payload.branch }}
+
+          Developed by Underworld Team with AI assistance (Claude)"
+          git push
