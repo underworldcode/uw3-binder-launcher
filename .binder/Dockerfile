@@ -4,7 +4,7 @@
 # This repo exists separately so mybinder.org can cache the image.
 # The start script pulls the underworld3 branch specified by UW3_BRANCH.
 
-FROM ghcr.io/underworldcode/uw3-base:2025.01
+FROM ghcr.io/underworldcode/uw3-base:development-slim
 
 # Pull from development branch of underworld3
 ENV UW3_BRANCH=development
