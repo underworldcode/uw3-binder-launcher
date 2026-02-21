@@ -1,7 +1,8 @@
 name: Update Image Reference
 
-# Triggered by underworld3 repo when a new Docker image is built
-# Updates the .binder/Dockerfile with the new image reference
+# Triggered by underworld3 repo when a new Docker image is built.
+# For branch pushes: updates the existing launcher branch's Dockerfile.
+# For tag pushes: creates a new launcher branch for the release tag.
 
 on:
   repository_dispatch:
@@ -12,32 +13,76 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout the correct branch
+      - name: Show payload
+        run: |
+          echo "Ref name: ${{ github.event.client_payload.branch }}"
+          echo "Ref type: ${{ github.event.client_payload.ref_type }}"
+
+      - name: Checkout for branch update
+        if: github.event.client_payload.ref_type != 'tag'
         uses: actions/checkout@v4
         with:
           ref: ${{ github.event.client_payload.branch }}
 
-      - name: Show payload
-        run: |
-          echo "Branch: ${{ github.event.client_payload.branch }}"
-          echo "Current Dockerfile:"
-          cat .binder/Dockerfile
-
-      - name: Update Dockerfile FROM tag
+      - name: Update existing branch Dockerfile
+        if: github.event.client_payload.ref_type != 'tag'
         run: |
           BRANCH="${{ github.event.client_payload.branch }}"
-          # Update the FROM line to use the new branch-specific tag
           sed -i "s|FROM ghcr.io/underworldcode/uw3-base:.*|FROM ghcr.io/underworldcode/uw3-base:${BRANCH}-slim|" .binder/Dockerfile
           echo "Updated Dockerfile:"
           cat .binder/Dockerfile
 
+      - name: Checkout main for tag release
+        if: github.event.client_payload.ref_type == 'tag'
+        uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Create release branch and Dockerfile
+        if: github.event.client_payload.ref_type == 'tag'
+        run: |
+          TAG="${{ github.event.client_payload.branch }}"
+          git checkout -b "${TAG}"
+
+          # Write a frozen Dockerfile for this release
+          cat > .binder/Dockerfile << EOF
+          # Binder launcher for Underworld3 - ${TAG} release
+          # Uses pre-built base image from GHCR
+          #
+          # This is a frozen release - the image tag will not change.
+          #
+          # Direct launch:
+          #   https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/${TAG}
+          #
+          # Launch with your repository (via nbgitpuller):
+          #   https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/${TAG}
+          #     ?urlpath=git-pull?repo=<your-repo-url>&branch=<branch>&urlpath=lab/tree/<repo-name>
+
+          FROM ghcr.io/underworldcode/uw3-base:${TAG}-slim
+
+          # Frozen release - UW3_BRANCH points to the release tag
+          ENV UW3_BRANCH=${TAG}
+          EOF
+
+          # Remove leading whitespace from heredoc
+          sed -i 's/^          //' .binder/Dockerfile
+
+          echo "Created Dockerfile for release ${TAG}:"
+          cat .binder/Dockerfile
+
       - name: Commit and push
         run: |
+          REF="${{ github.event.client_payload.branch }}"
+          REF_TYPE="${{ github.event.client_payload.ref_type }}"
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add .binder/Dockerfile
-          # Only commit if there are changes
-          git diff --staged --quiet || git commit -m "Update image tag for ${{ github.event.client_payload.branch }}
+          if [ "${REF_TYPE}" = "tag" ]; then
+            git commit -m "Create launcher branch for release ${REF}"
+            git push origin "${REF}"
+          else
+            git diff --staged --quiet || git commit -m "Update image tag for ${REF}
 
           Developed by Underworld Team with AI assistance (Claude)"
-          git push
+            git push
+          fi
