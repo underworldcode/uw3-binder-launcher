@@ -6,8 +6,10 @@ Launch Underworld3 in your browser via [mybinder.org](https://mybinder.org) - no
 
 | Branch | Underworld3 Branch | Launch |
 |--------|-------------------|--------|
-| `main` | `main` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main) |
-| `development` | `development` | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/development) |
+| `main` | `main` (stable) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/main) |
+| `development` | `development` (latest) | [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/development) |
+
+Release tags (e.g., `v3.0.0`) are also available as launcher branches - see [Pinning to a Release](#pinning-to-a-release) below.
 
 Click a badge above to launch JupyterLab with the Underworld3 tutorials.
 
@@ -29,7 +31,7 @@ https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/<uw3-branch>
 
 | Parameter | Description | Example |
 |-----------|-------------|---------|
-| `<uw3-branch>` | Which Underworld3 branch to use | `development`, `main` |
+| `<uw3-branch>` | Which Underworld3 branch or tag to use | `development`, `main`, `v3.0.0` |
 | `repo` | Your GitHub repository URL (URL-encoded) | `https%3A%2F%2Fgithub.com%2Fuser%2Frepo` |
 | `branch` | Branch of your repository to clone | `main` |
 | `urlpath` | Where to open in JupyterLab | `lab/tree/repo-name/notebook.ipynb` |
@@ -87,6 +89,22 @@ Copy one of these templates into your README, replacing the placeholders:
 - Notebooks should use the `python3` kernel
 - No `.binder/` directory or Dockerfile needed
 - Import Underworld3 as: `import underworld3 as uw`
+
+## Pinning to a Release
+
+When a version tag (e.g., `v3.0.0`) is pushed to the Underworld3 repository, a corresponding launcher branch is created automatically. This lets you pin your notebooks to a specific Underworld3 release for reproducibility.
+
+**Launch against a specific release:**
+```
+https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/v3.0.0
+```
+
+**Launch your repository against a specific release:**
+```
+https://mybinder.org/v2/gh/underworldcode/uw3-binder-launcher/v3.0.0?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252FYOUR_USER%252FYOUR_REPO%26branch%3Dmain%26urlpath%3Dlab%252Ftree%252FYOUR_REPO
+```
+
+Release branches use frozen Docker images - the UW3 code won't change between launches, ensuring consistent behaviour for teaching materials and published notebooks.
 
 ## How It Works
 
