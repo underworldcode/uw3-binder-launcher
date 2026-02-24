@@ -13,7 +13,7 @@
 #
 # See: https://github.com/underworldcode/underworld3/blob/main/scripts/binder_wizard.py
 
-FROM ghcr.io/underworldcode/uw3-base:2025.01
+FROM ghcr.io/underworldcode/uw3-base:-slim
 
 # Pull from main branch of underworld3
 ENV UW3_BRANCH=main
